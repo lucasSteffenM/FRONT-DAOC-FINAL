@@ -7,7 +7,7 @@ export const Container = styled.div`
     opacity: ${props => props.done ? 0.6 : 1};
 
     & + div {
-        border-left: 1px solid rgba(0, 0, 0, 0.05);
+        border-left: 2px solid rgba(31, 29, 29, 0.5);
     }
 
     header {
@@ -35,6 +35,7 @@ export const Container = styled.div`
 
     ul {
         margin-top: 30px;
+        padding-left: 0;
     }
 
 `;

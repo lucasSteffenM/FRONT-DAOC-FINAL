@@ -3,10 +3,12 @@ import { useDrag, useDrop } from 'react-dnd';
 
 import BoardContext from '../Board/context'
 
-import { Container, Label } from './styles';
+import { Container } from './styles';
 
+import ModalEditComponent from '../modal/modalEdit';
+import './style.css'; // Tell webpack that Button.js uses these styles
 
-export default function Card({ data, index, listIndex }) {
+export default function Card({ data, index, listIndex, status }) {
     const ref = useRef();
     const { move } = useContext(BoardContext);
 
@@ -32,21 +34,20 @@ export default function Card({ data, index, listIndex }) {
             }
 
             const targetSize = ref.current.getBoundingClientRect();
-            const targetCenter = (targetSize.bottom - targetSize.top) / 2;   
+            const targetCenter = (targetSize.bottom - targetSize.top) / 2;
 
             const draggedOffset = monitor.getClientOffset();
             const draggedTop = draggedOffset.y - targetSize.top;
-            
+
             if (draggedIndex < targetIndex && draggedTop < targetCenter) {
                 return;
             }
-            
+
             if (draggedIndex > targetIndex && draggedTop > targetCenter) {
                 return;
             }
 
             move(draggedListIndex, targetListIndex, draggedIndex, targetIndex);
-
             item.index = targetIndex;
             item.listIndex = targetListIndex;
         },
@@ -55,12 +56,18 @@ export default function Card({ data, index, listIndex }) {
     dragRef(dropRef(ref));
 
     return (
-        <Container ref={ref} isDragging={isDragging}>
-            <header>
-                {data.labels.map(label => <Label key={label} color={label} />)}
-            </header>
-            <p>{data.content}</p>
-            { data.user && <img src={data.user} alt="Imagem"></img> }
+        (
+            data?.content 
+        ?
+        <Container ref={ref} >
+            <div className='d-flex justify-content-between align-items-center'> 
+            <div style={{ wordBreak: 'break-all' }}>{data?.content}</div>
+                <ModalEditComponent card={data} status={status} />
+            </div>
+
         </Container>
+        :
+        <Container ref={ref} draggable={false} className='box'/>
+        )
     );
 }

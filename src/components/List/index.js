@@ -1,22 +1,21 @@
 import React from 'react';
 
-import { MdAdd } from 'react-icons/md';
+
 
 import Card from '../Card';
 
 import { Container } from './styles';
 
 
+
 export default function List({ data, index: listIndex }) {
+    
+    
     return(
         <Container done={data.done}>
+            <br/>
             <header>
-                <h2>{data.title}</h2>
-                {data.creatable && (
-                    <button type="button">
-                        <MdAdd size={24} color="#FFF"/>
-                    </button>
-                )}
+                <h2 className='fw-bold text-capitalize'>{data.title}</h2>
             </header>
 
             <ul>
@@ -26,6 +25,7 @@ export default function List({ data, index: listIndex }) {
                         listIndex={listIndex}
                         index={index} 
                         data={card}
+                        status={data.title}
                     />
                 )) }
             </ul>

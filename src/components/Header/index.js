@@ -5,7 +5,7 @@ import { Container } from './styles';
 export default function Header() {
     return(
         <Container>
-            <h1>Kanban - AS</h1>
+            <h1>Gerenciamentos de tarefas</h1>
         </Container>
     )
 }
