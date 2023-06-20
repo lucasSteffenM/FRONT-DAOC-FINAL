@@ -1,6 +1,5 @@
 # Instruções para execução
 
-- Instalar o axios: npm i axios
 
 - Criar uma pasta
 
