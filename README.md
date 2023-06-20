@@ -1,5 +1,7 @@
 # Instruções para execução
 
+- npm i axios
+
 - Criar uma pasta
 
 - Abrir o diretorio dessa pasta no terminal de comando
